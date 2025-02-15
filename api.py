@@ -1,9 +1,8 @@
-"""api.py"""
+"""API for valid scrabble words"""
 # pylint: disable=unused-variable
 
-"""API for movies"""
-from datetime import datetime
 from flask import Flask, jsonify, request
+from datetime import datetime
 
 app = Flask(__name__)
 
