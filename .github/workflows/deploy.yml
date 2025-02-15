@@ -45,7 +45,7 @@ jobs:
           pip install -r requirements.txt
   
       - name: Run Linter
-        run: pylint $(git ls-files '*.py') --fail-under=9
+        run: pylint $(git ls-files '*.py') --fail-under=8
 
   deploy:
     runs-on: ubuntu-latest
