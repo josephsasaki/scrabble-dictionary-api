@@ -58,6 +58,6 @@ jobs:
         uses: easingthemes/ssh-deploy@v5.1.0
         with:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          REMOTE_HOST: ${{ variables.REMOTE_HOST }}
-          REMOTE_USER: ${{ variables.REMOTE_USER }}
-          TARGET: ${{ variables.TARGET }}
+          REMOTE_HOST: $REMOTE_HOST
+          REMOTE_USER: $REMOTE_USER
+          TARGET: $TARGET
