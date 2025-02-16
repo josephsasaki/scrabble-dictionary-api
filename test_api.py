@@ -82,7 +82,7 @@ def test_invalid_arguments_no_reverse(invalid_argument, client):
     assert response.status_code == 400
     assert response.json == {
         "error": "Invalid input",
-        "message": "Words should only contain alphabetic characters. Numbers or special characters are not allowed."
+        "message": "Words should only contain alphabetic characters."
     }
 
 
@@ -93,7 +93,7 @@ def test_invalid_arguments_reverse(invalid_argument, client):
     assert response.status_code == 400
     assert response.json == {
         "error": "Invalid input",
-        "message": "Words should only contain alphabetic characters. Numbers or special characters are not allowed."
+        "message": "Words should only contain alphabetic characters."
     }
 
 

@@ -1,8 +1,9 @@
 """API for valid scrabble words"""
 # pylint: disable=unused-variable
 
-from flask import Flask, jsonify, request
 from datetime import datetime
+from flask import Flask, jsonify, request
+
 
 app = Flask(__name__)
 
