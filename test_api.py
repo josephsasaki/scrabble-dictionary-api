@@ -5,7 +5,7 @@ from api import app
 
 
 VALID_WORDS = ["alfa", "bravo", "charlie", "delta", "echo", "foxtrot",
-               "golf", "hotel", "inhale", "juliennes", "kilo", "lima", "mike",
+               "golfer", "hotel", "inhale", "juliennes", "kilo", "lima", "mike",
                "novemdecillion", "oscillate", "papa", "queen", "romeo", "sierra",
                "tango", "uniform", "victor", "whiskey", "xanthan", "yanked", "zucchetto"]
 INVALID_WORDS = ["axxxxx", "bxxxxx", "cxxxxx", "dxxxxx", "exxxxx", "fxxxxx",
