@@ -16,6 +16,7 @@ VALID_WORDS_REVERSED = [word[::-1] for word in VALID_WORDS]
 INVALID_WORDS_REVERSED = [word[::-1] for word in INVALID_WORDS]
 INVALID_ARGUMENTS = ["1234", "ab473", "_387f?", "furf ",
                      "03[]", "@fvvrc", "az ajqoq", "ffefe\n", " "]
+CAPITALISED_VALID_WORDS = [word.upper() for word in VALID_WORDS]
 
 
 @pytest.fixture(name='client')
@@ -94,3 +95,13 @@ def test_invalid_arguments_reverse(invalid_argument, client):
         "error": "Invalid input",
         "message": "Words should only contain alphabetic characters. Numbers or special characters are not allowed."
     }
+
+
+@pytest.mark.parametrize("capitalised_word", CAPITALISED_VALID_WORDS)
+def test_valid_capitalised_no_reverse(capitalised_word, client):
+    '''Test capitalised valid words return true (when not checking for reverse)'''
+    response = client.get(f"/validate-word-no-reverse/{capitalised_word}")
+    assert response.status_code == 200
+    assert response.json == {
+        "word": capitalised_word,
+        "validity": True}
