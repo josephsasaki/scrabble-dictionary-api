@@ -8,17 +8,14 @@ VALID_WORDS = ["alfa", "bravo", "charlie", "delta", "echo", "foxtrot",
                "golf", "hotel", "inhale", "juliennes", "kilo", "lima", "mike",
                "novemdecillion", "oscillate", "papa", "queen", "romeo", "sierra",
                "tango", "uniform", "victor", "whiskey", "xanthan", "yanked", "zucchetto"]
-
-
 INVALID_WORDS = ["axxxxx", "bxxxxx", "cxxxxx", "dxxxxx", "exxxxx", "fxxxxx",
                  "gxxxxx", "hxxxxx", "ixxxxx", "jxxxxx", "kxxxxx", "lxxxxx", "mxxxxx",
                  "nxxxxx", "oxxxxx", "pxxxxx", "qxxxxx", "rxxxxx", "sxxxxx",
                  "txxxxx", "uxxxxx", "vxxxx", "wxxxxx", "xxxxxx", "yxxxxx", "zxxxxx"]
-
-
 VALID_WORDS_REVERSED = [word[::-1] for word in VALID_WORDS]
-
 INVALID_WORDS_REVERSED = [word[::-1] for word in INVALID_WORDS]
+INVALID_ARGUMENTS = ["1234", "ab473", "_387f?", "furf ",
+                     "03[]", "@fvvrc", "az ajqoq", "ffefe\n", " "]
 
 
 @pytest.fixture(name='client')
@@ -75,3 +72,25 @@ def test_invalid_reverse(invalid_word_reversed, client):
     assert response.json == {
         "word": invalid_word_reversed,
         "validity": False}
+
+
+@pytest.mark.parametrize("invalid_argument", INVALID_ARGUMENTS)
+def test_invalid_arguments_no_reverse(invalid_argument, client):
+    '''Test invalid arguments return 400 (when not checking for reverse)'''
+    response = client.get(f"/validate-word-no-reverse/{invalid_argument}")
+    assert response.status_code == 400
+    assert response.json == {
+        "error": "Invalid input",
+        "message": "Words should only contain alphabetic characters. Numbers or special characters are not allowed."
+    }
+
+
+@pytest.mark.parametrize("invalid_argument", INVALID_ARGUMENTS)
+def test_invalid_arguments_reverse(invalid_argument, client):
+    '''Test invalid arguments return 400 (when checking for reverse)'''
+    response = client.get(f"/validate-word-reverse/{invalid_argument}")
+    assert response.status_code == 400
+    assert response.json == {
+        "error": "Invalid input",
+        "message": "Words should only contain alphabetic characters. Numbers or special characters are not allowed."
+    }
