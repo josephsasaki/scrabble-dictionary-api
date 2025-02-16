@@ -15,7 +15,7 @@ INVALID_WORDS = ["axxxxx", "bxxxxx", "cxxxxx", "dxxxxx", "exxxxx", "fxxxxx",
 VALID_WORDS_REVERSED = [word[::-1] for word in VALID_WORDS]
 INVALID_WORDS_REVERSED = [word[::-1] for word in INVALID_WORDS]
 INVALID_ARGUMENTS = ["1234", "ab473", "_387f?", "furf ",
-                     "03[]", "@fvvrc", "az ajqoq", "ffefe\n", " "]
+                     "03[]", "@fvvrc", "az ajqoq", "ffefe.", " "]
 CAPITALISED_VALID_WORDS = [word.upper() for word in VALID_WORDS]
 
 

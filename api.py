@@ -1,9 +1,8 @@
 """API for valid scrabble words"""
 # pylint: disable=unused-variable
 
-from datetime import datetime
-from flask import Flask, jsonify, request
-
+from flask import Flask
+from validator import is_valid_word, is_valid_scrabble_word
 
 app = Flask(__name__)
 
@@ -11,7 +10,37 @@ app = Flask(__name__)
 @app.route("/", methods=["GET"])
 def endpoint_index():
     """Landing"""
-    return jsonify({"message": "Welcome to the Scrabble Dictionary API"})
+    return {"message": "Welcome to the Scrabble Dictionary API"}, 200
+
+
+@app.route("/validate-word-no-reverse/<passed_str>", methods=["GET"])
+def endpoint_validate_word_no_reverse(passed_str: str):
+    """Check a word is a valid scrabble word, not checking the reverse."""
+    if not is_valid_word(passed_str):
+        return {
+            "error": "Invalid input",
+            "message": "Words should only contain alphabetic characters."
+        }, 400
+    result = is_valid_scrabble_word(passed_str, check_reverse=False)
+    return {
+        "word": passed_str,
+        "validity": result,
+    }, 200
+
+
+@app.route("/validate-word-reverse/<passed_str>", methods=["GET"])
+def endpoint_validate_word_reverse(passed_str: str):
+    """Check a word is a valid scrabble word, checking the reverse."""
+    if not is_valid_word(passed_str):
+        return {
+            "error": "Invalid input",
+            "message": "Words should only contain alphabetic characters."
+        }, 400
+    result = is_valid_scrabble_word(passed_str, check_reverse=True)
+    return {
+        "word": passed_str,
+        "validity": result,
+    }, 200
 
 
 if __name__ == "__main__":
