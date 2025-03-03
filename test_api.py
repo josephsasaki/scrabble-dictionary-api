@@ -1,7 +1,7 @@
 # pylint: disable=unused-variable
 '''Test api file'''
 import pytest
-from api import app
+from app import app
 
 
 VALID_WORDS = ["alfa", "bravo", "charlie", "delta", "echo", "foxtrot",
