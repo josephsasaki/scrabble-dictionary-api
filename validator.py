@@ -1,3 +1,5 @@
+'''VALIDATOR: Module for checking a word is valid.'''
+# pylint: disable=unused-variable
 
 
 def is_valid_word(passed_str: str) -> bool:
@@ -5,17 +7,19 @@ def is_valid_word(passed_str: str) -> bool:
     return passed_str.isalpha()
 
 
-def is_valid_scrabble_word(passed_word: str, check_reverse: bool) -> bool:
-    """Checks whether the passed word is a valid scrabble word."""
+def is_scrabble_word(passed_word: str) -> list[bool]:
+    """Checks whether the passed word is a scrabble word, both forwards and reversed."""
     passed_word = passed_word.lower()
     passed_word_reversed = passed_word[::-1]
-    with open("dictionary.txt", encoding="utf-8", mode="r") as f:
-        if check_reverse:
-            for line in f:
-                if line.strip() in {passed_word, passed_word_reversed}:
-                    return True
-            return False
-        for line in f:
-            if line.strip() == passed_word:
-                return True
-        return False
+    result = [False, False]
+    with open("dictionary.txt", encoding="utf-8", mode="r") as dictionary:
+        for line in dictionary:
+            # strip word to remove new-line character
+            word = line.strip()
+            if word == passed_word:
+                result[0] = True
+            if word == passed_word_reversed:
+                result[1] = True
+            if all(result):
+                return result
+    return result
