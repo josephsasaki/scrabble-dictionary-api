@@ -10,14 +10,14 @@ app = Flask(__name__)
 
 
 @app.route("/", methods=["GET"])
-@cross_origin(origins=["https://josephsasaki.github.io/scramble/"])
+@cross_origin(origins=["https://josephsasaki.github.io"])
 def endpoint_index():
     '''Landing'''
     return {"message": "Welcome to the Scrabble Dictionary API!"}, 200
 
 
 @app.route("/validate-word/<passed_str>", methods=["GET"])
-@cross_origin(origins=["https://josephsasaki.github.io/scramble/"])
+@cross_origin(origins=["https://josephsasaki.github.io"])
 def endpoint_validate_word(passed_str: str):
     '''First, check the passed string is a valid word (only alphabetic characters), then check
     if it is a scrabble word.'''
