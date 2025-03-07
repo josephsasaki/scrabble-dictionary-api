@@ -26,5 +26,5 @@ def endpoint_validate_word(passed_str: str):
     return {
         "word": passed_str,
         "forwards": result[0],
-        "backwards": result[1],
+        "reversed": result[1],
     }, 200
