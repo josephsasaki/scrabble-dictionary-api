@@ -7,7 +7,8 @@ from validator import is_valid_word, is_scrabble_word
 
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={
+     r"/*": {"origins": "https://josephsasaki.github.io/scramble/"}})
 
 
 @app.route("/", methods=["GET"])
