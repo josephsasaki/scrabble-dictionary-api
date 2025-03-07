@@ -1,8 +1,9 @@
-'''API for valid scrabble words'''
+'''APP: API for valid scrabble words'''
 # pylint: disable=unused-variable
 
 from flask import Flask
 from validator import is_valid_word, is_scrabble_word
+
 
 app = Flask(__name__)
 

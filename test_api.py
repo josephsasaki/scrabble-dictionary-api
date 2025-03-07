@@ -1,5 +1,6 @@
+'''TEST_API: module for testing behaviour of api.py'''
 # pylint: disable=unused-variable
-'''Test api file'''
+
 import pytest
 from app import app
 
@@ -33,5 +34,5 @@ def test_valid_word(client):
     response = client.get(f"/validate-word/{valid_word}")
     assert response.status_code == 200
     assert response.json["word"] == "hello"
-    assert response.json["forwards"] == True
-    assert response.json["reversed"] == False
+    assert response.json["forwards"] is True
+    assert response.json["reversed"] is False

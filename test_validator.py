@@ -1,5 +1,6 @@
+'''TEST_VALIDATOR: module for testing behaviour of validator.py'''
 # pylint: disable=unused-variable
-'''Test api file'''
+
 import pytest
 from validator import is_valid_word, is_scrabble_word
 
@@ -31,19 +32,19 @@ PALINDROMES = [
 @pytest.mark.parametrize("valid_word", VALID_SCRABBLE + INVALID_SCRABBLE)
 def test_is_valid_word_valid(valid_word):
     '''Test valid words return true'''
-    assert is_valid_word(valid_word) == True
+    assert is_valid_word(valid_word) is True
 
 
 @pytest.mark.parametrize("invalid_word", INVALID_WORD)
 def test_is_valid_word_invalid(invalid_word):
     '''Test invalid words return false'''
-    assert is_valid_word(invalid_word) == False
+    assert is_valid_word(invalid_word) is False
 
 
 @pytest.mark.parametrize("valid_capitalised_word", map(lambda x: x.upper(), VALID_SCRABBLE))
 def test_is_valid_word_capitalised(valid_capitalised_word):
     '''Test capitalised valid words return true'''
-    assert is_valid_word(valid_capitalised_word) == True
+    assert is_valid_word(valid_capitalised_word) is True
 
 
 # --- IS_SCRABBLE_WORD ---
@@ -68,6 +69,6 @@ def test_is_scrabble_word_true_false(valid_forwards):
 
 
 @pytest.mark.parametrize("valid_reversed", map(lambda x: x[::-1], VALID_SCRABBLE))
-def test_is_scrabble_word_true_false(valid_reversed):
+def test_is_scrabble_word_false_true(valid_reversed):
     '''Test invalid scrabble words return true forwards and false backwards'''
     assert is_scrabble_word(valid_reversed) == [False, True]
